@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>AWS BACKUP CALCULATION</title>
+     <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+     <h1 class="page__heading">AWS SNAPSHOT BACKUP COST CALCULATION</h1>
+     <div id="container__base-inputs">
+          <div class="container__input__wrapper">
+               <label for="input__EBS-volume-size" class="container__input__label ">Total EBS Volume Size (Tib)</label>
+               <div class="container__input__element__wrapper">
+                    <input type="number" id="EBS-volume-size" class="container__input__element" placeholder="0">
+                    <span class="container__input__element__unit">Tib</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="EBS-change-rate" class="container__input__label"> EBS Volume Change Rate (%)</label>
+               <div class="container__input__element__wrapper">
+                    <input type="number" id="EBS-change-rate" class="container__input__element" placeholder="0">
+                    <span class="container__input__element__unit">%</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="protection-interval" class="container__input__label">Protection Interval in Hours</label>
+               <div class="container__input__element__wrapper">
+                    <input type="number" id="protection-interval" class="container__input__element" placeholder="0">
+                    <span class="container__input__element__unit">Hrs</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-retention" class="container__input__label">Primary Region Retention Copies</label>
+               <div class="container__input__element__wrapper">
+                    <input type="number" id="primary-retention" class="container__input__element" placeholder="0">
+                    <span class="container__input__element__unit">Count</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="remote-retention" class="container__input__label">Remote Region Retention Copies</label>
+               <div class="container__input__element__wrapper">
+                    <input type="number" id="remote-retention" class="container__input__element" placeholder="0">
+                    <span class="container__input__element__unit">Count</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="total-protection" class="container__input__label">Total protections in a month</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input id="total-protection" class="container__calculated__input__element" placeholder="0" 
+                    title="Total protections in a month" readonly>
+                    <span class="container__input__element__unit">Count</span>
+               </div>
+          </div>
+     </div>
+
+     <h2 class="page__heading">REGION SELECTION</h2>
+
+     <div class="container__region-selection">
+          <div class="container__input__wrapper">
+               <label for="primary-region" class="container__input__label">Select the Primary Region</label>
+               <select name="primary-region" id="primary-region" class="container__dropdown__input__element">
+                    <option value="" selected disabled hidden>Choose the Primary-region</option>
+                    <option value="US East (N. Virginia)">US East (N. Virginia)</option>
+                    <option value="US West (Northern California)">US West (Northern California)</option>
+                    <option value="US East (Ohio)">US East (Ohio)</option>
+                    <option value="US West (Oregon)">US West (Oregon)</option>
+                    <option value="Africa (Cape Town)">Africa (Cape Town)</option>
+                    <option value="Asia Pacific (Hong Kong)">Asia Pacific (Hong Kong)</option>
+                    <option value="Asia Pacific (Singapore)">Asia Pacific (Singapore)</option>
+                    <option value="Asia Pacific (Mumbai)">Asia Pacific (Mumbai)</option>
+                    <option value="Asia Pacific (Hyderabad)">Asia Pacific (Hyderabad)</option>
+                    <option value="Asia Pacific (Osaka)">Asia Pacific (Osaka)</option>
+               </select>
+          </div>
+          <div class="container__input__wrapper">
+               <label for="remote-region" class="container__input__label">Select the Remote Region</label>
+               <select name="remote-region" id="remote-region" class="container__dropdown__input__element">
+                    <option value="" selected disabled hidden>Choose the Remote-region</option>
+                    <option value="US East (N. Virginia)">US East (N. Virginia)</option>
+                    <option value="US West (Northern California)">US West (Northern California)</option>
+                    <option value="US East (Ohio)">US East (Ohio)</option>
+                    <option value="US West (Oregon)">US West (Oregon)</option>
+                    <option value="Africa (Cape Town)">Africa (Cape Town)</option>
+                    <option value="Asia Pacific (Hong Kong)">Asia Pacific (Hong Kong)</option>
+                    <option value="Asia Pacific (Singapore)">Asia Pacific (Singapore)</option>
+                    <option value="Asia Pacific (Mumbai)">Asia Pacific (Mumbai)</option>
+                    <option value="Asia Pacific (Hyderabad)">Asia Pacific (Hyderabad)</option>
+                    <option value="Asia Pacific (Osaka)">Asia Pacific (Osaka)</option>
+               </select>
+          </div>
+     </div>
+
+     <h2 class="page__heading">CALCULATED VALUES </h2>
+     <h3 class="page__heading">OVERALL CALCULATION</h3>
+     <div class="container__calculated__values--overall">
+          <div class="container__input__wrapper">
+               <label for="primary-region-local-protection" class="container__input__label">
+                Primary Region Local Protection Only(Inter-zone recovery)</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input type="number" id="primary-region-local-protection"
+                         class="container__calculated__input__element--cost" title="Primary Region Local Protection Only 
+                         (Inter-zone recovery)" placeholder="0" readonly>
+               </div>
+          </div>
+          
+            <div class="container__input__wrapper">
+               <label for="remote-region-storage-cost" class="container__input__label">Remote Region Storage cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input type="number" id="remote-region-storage-cost"
+                         class="container__calculated__input__element--cost" title="Remote Region Storage cost" placeholder="0" readonly>
+               </div>
+          </div>
+
+            <div class="container__input__wrapper">
+               <label for="inter-region-data-transfer-cost" class="container__input__label">Inter-region data transfer cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input type="number" id="inter-region-data-transfer-cost"
+                         class="container__calculated__input__element--cost" title="Inter-region data transfer cost" placeholder="0" readonly>
+               </div>
+          </div>
+
+            <div class="container__input__wrapper">
+               <label for="total-cost" class="container__input__label">Total cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input type="number" id="total-cost"
+                         class="container__calculated__input__element--cost" title="Overall Total Cost" placeholder="0" readonly>
+               </div>
+          </div>
+     </div>
+
+
+     <h3 class="page__heading">PRIMARY REGION</h3>
+     <div class="container__calculated__values">
+          <div class="container__input__wrapper">
+               <label for="primary-region-EBS-volume-size-in-gb" class="container__input__label"> Total EBS Volume Size
+                    (GiB)</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input type="number" id="primary-region-EBS-volume-size-in-gb"
+                         class="container__calculated__input__element" title="Total EBS Volume Size(GiB)" 
+                         placeholder="0" readonly>
+                    <span class="container__input__element__unit">GiB</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-region-EBS-change-between-protection" class="container__input__label"> EBS Change
+                    between protections in GiB</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input type="number" id="primary-region-EBS-change-between-protection"
+                         class="container__calculated__input__element" placeholder="0" 
+                         title="EBS Change between protections in Gib" readonly>
+                    <span class="container__input__element__unit">GiB</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-region-first-snapshot-storage-size" class="container__input__label">First Snapshot
+                    Storage Size</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input id="primary-region-first-snapshot-storage-size" class="container__calculated__input__element"
+                         placeholder="0" title="First Snapshot Storage Size" readonly>
+                    <span class="container__input__element__unit">Gib</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-region-retention-copies-incremental-storage-size"
+                    class="container__input__label">Retention copies with incremental storage size</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input id="primary-region-retention-copies-incremental-storage-size"
+                         class="container__calculated__input__element" 
+                         title = "Retention copies with incremental storage size" placeholder="0" readonly>
+                    <span class="container__input__element__unit">Gib</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-region-snapshot-storage-size" class="container__input__label">Primary Region snapshot
+                    storage size</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input id="primary-region-snapshot-storage-size" class="container__calculated__input__element"
+                          title="Primary Region snapshot storage size" placeholder="0" readonly>
+                    <span class="container__input__element__unit">Gib</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-region-snapshot-cost" class="container__input__label">Primary Region snapshot
+                    cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input id="primary-region-snapshot-cost" class="container__calculated__input__element--cost"
+                           title="Primary Region snapshot cost" placeholder="0" readonly>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-region-egress-network-cost" class="container__input__label">Primary Region Egress Network
+                    cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input id="primary-region-egress-network-cost" class="container__calculated__input__element--cost"
+                         title="Primary Region Egress Network cost" placeholder="0" readonly>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="primary-region-totalcost" class="container__input__label">Primary Region Total Cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input id="primary-region-totalcost" class="container__calculated__input__element--cost" placeholder="0"
+                         title="Primary Region Total Cost" readonly>
+               </div>
+          </div>
+     </div>
+
+     <h3 class="page__heading">REMOTE REGION</h3>
+          <div class="container__calculated__values">
+               <div class="container__input__wrapper">
+                    <label for="remote-region-full-snapshot-size" class="container__input__label">Remote Region Full snapshot size</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input type="number" id="remote-region-full-snapshot-size"
+                         class="container__calculated__input__element" placeholder="0" 
+                         title="Remote Region Full snapshot size" readonly>
+                    <span class="container__input__element__unit">Gib</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="remote-region-incremental-storage-size" class="container__input__label">Remote Region
+                    incremental storage size</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input type="number" id="remote-region-incremental-storage-size"
+                         class = "container__calculated__input__element" placeholder="0" 
+                         title = "Remote Region incremental storage size" readonly>
+                    <span class="container__input__element__unit">Gib</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="remote-region-retention-copies-incremental-storage-size"
+                    class="container__input__label">Remote Region retention copies with incremental size</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input type="number" id="remote-region-retention-copies-incremental-storage-size"
+                         class="container__calculated__input__element" placeholder="0" 
+                         title = "Remote Region retention copies with incremental size" readonly>
+                    <span class="container__input__element__unit">Gib</span>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="remote-region-storage-size" class="container__input__label">Remote Region storage
+                    size</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <input type="number" id="remote-region-storage-size" class="container__calculated__input__element"
+                        title="Remote Region storage size" placeholder="0" readonly>
+                    <span class="container__input__element__unit">Gib</span>
+               </div>
+
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="remote-region-snapshot-storage-cost" class="container__input__label">Remote Region snapshot
+                    storage cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input type="number" id="remote-region-snapshot-storage-cost"
+                         title="Remote Region snapshot storage cost" class="container__calculated__input__element--cost" 
+                         placeholder="0" readonly>
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="remote-region-ingress-network-cost" class="container__input__label">Remote Region Ingress
+                    Network cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input id="remote-region-ingress-network-cost" class="container__calculated__input__element--cost"
+                        title="Remote Region Ingress Network cost" placeholder="0" readonly >
+               </div>
+          </div>
+
+          <div class="container__input__wrapper">
+               <label for="remote-region-totalcost" class="container__input__label">Remote Region Total Cost</label>
+               <div class="container__input__element__wrapper--calculated__values">
+                    <span class="container__input__element__unit">$</span>
+                    <input id="remote-region-totalcost" class="container__calculated__input__element--cost" placeholder="0"
+                         title="Remote Region Total Cost" readonly>
+               </div>
+          </div>
+     </div>
+
+     <script src="app.js"></script>
+</body>
+
+</html>

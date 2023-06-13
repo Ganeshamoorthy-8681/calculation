@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+   
+}
+
+body {
+    max-width: 1300px;
+    height: auto;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    margin: 0 auto;
+}
+
+.page__heading {
+    margin-top: 50px ;
+    margin-left: 50px;
+}
+
+#container__base-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    min-height: 650px;
+}
+
+.container__input__wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container__calculated__values {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    min-height: 750px;
+}
+
+.container__calculated__values--overall {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    height: 500px;
+}
+
+
+.container__input__label {
+    font-size: 1.8rem ;
+}
+
+.container__input__element__wrapper {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid rgb(0, 174, 255);
+    border-radius: 5px ;
+}
+
+.container__input__element, .container__calculated__input__element ,
+.container__calculated__input__element--cost{
+   height: 50px;
+   width: 220px;
+   padding-left: 20px;
+   font-size: 1.2rem;
+   border: none;
+   outline: none;
+   border-right: 1px solid rgba(187, 182, 182,0.5);
+}
+
+.add-style-onfocus {
+    border-width: 3px;
+    box-shadow: 3px 5px  #c2c2c2;
+}
+
+.container__input__element__unit {
+   font-size: 1.4rem;
+   width: 80px;
+   font-weight: bold;
+   text-align: center;
+}
+
+.container__dropdown__input__element {
+    height: 50px;
+    min-width: 300px;
+    border: 2px solid rgb(0, 174, 255);
+    font-size: 1.2rem;
+    padding: 10px;
+    outline: none;
+}
+
+.container__calculated__input__element--cost {
+    border-right: none;
+    border-left: 1px solid rgba(187, 187, 182,0.5);
+}
+
+
+.container__input__element__wrapper--calculated__values {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid orange;
+    border-radius: 5px;
+}
+
+.container__region-selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    height: 250px;
+} 
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox
+input[type=number] {
+  -moz-appearance: textfield;
+} */
