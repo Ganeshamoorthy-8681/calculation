@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (Frankfurt)",
+    "regionCode": "eu-central-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.054,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

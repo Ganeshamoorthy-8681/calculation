@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (Spain)",
+    "regionCode": "eu-south-2",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.050,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

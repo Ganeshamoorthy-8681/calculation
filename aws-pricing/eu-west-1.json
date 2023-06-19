@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (Ireland)",
+    "regionCode": "eu-west-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.050,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

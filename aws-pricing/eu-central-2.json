@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (Zurich)",
+    "regionCode": "eu-central-2",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.059,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

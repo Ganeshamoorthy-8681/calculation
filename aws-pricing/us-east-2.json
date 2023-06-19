@@ -1,0 +1,13 @@
+{
+    "regionName": "US East (Ohio)",
+    "regionCode": "us-east-2",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.050,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": {
+                "us-east-1": 0.010
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (Milan)",
+    "regionCode": "eu-south-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.0525,
+            "generalOutboundCost": 0.02,
+            "specificOutboundCost": null
+        }
+    }
+}

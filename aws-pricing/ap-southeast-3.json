@@ -1,0 +1,11 @@
+{
+    "regionName": "Asia Pacific (Jakarta)",
+    "regionCode": "ap-southeast-3",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.050,
+            "generalOutboundCost": 0.10,
+            "specificOutboundCost": null
+        }
+    }
+}

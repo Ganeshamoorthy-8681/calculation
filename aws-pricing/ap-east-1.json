@@ -1,0 +1,11 @@
+{
+    "regionName": "Asia Pacific (Hong Kong)",
+    "regionCode": "ap-east-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.055,
+            "generalOutboundCost": 0.09,
+            "specificOutboundCost": null
+        }
+    }
+}

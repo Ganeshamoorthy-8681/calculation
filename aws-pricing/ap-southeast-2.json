@@ -1,0 +1,13 @@
+{
+    "regionName": "Asia Pacific (Sydney)",
+    "regionCode": "ap-southeast-2",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.055,
+            "generalOutboundCost": 0.098,
+            "specificOutboundCost": {
+                "ap-southeast-4": 0.08
+            }
+        }
+    }
+}

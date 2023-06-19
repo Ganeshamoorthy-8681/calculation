@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (Paris)",
+    "regionCode": "eu-west-3",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.053,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

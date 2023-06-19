@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (Stockholm)",
+    "regionCode": "eu-north-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.0475,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "regionName": "Africa (Cape Town)",
+    "regionCode": "af-south-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.0595,
+            "generalOutboundCost": 0.147,
+            "specificOutboundCost": null
+        }
+    }
+}

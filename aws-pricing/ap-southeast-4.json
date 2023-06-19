@@ -1,0 +1,15 @@
+{
+    "regionName": "Asia Pacific (Melbourne)",
+    "regionCode": "ap-southeast-4",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.055,
+            "generalOutboundCost": 0.100,
+            "specificOutboundCost": {
+                "ap-southeast-2": 0.080,
+                "me-south-1": 0.140,
+                "me-central-1": 0.140
+            }
+        }
+    }
+}

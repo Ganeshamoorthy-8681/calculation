@@ -1,0 +1,11 @@
+{
+    "regionName": "Canada (Central)",
+    "regionCode": "ca-central-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.055,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

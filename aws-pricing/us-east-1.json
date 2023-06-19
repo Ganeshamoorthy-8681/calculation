@@ -1,0 +1,13 @@
+{
+    "regionName": "US East (N.Virginia)",
+    "regionCode": "us-east-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.050,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": {
+                "us-east-2": 0.010
+            }
+        }
+    }
+}

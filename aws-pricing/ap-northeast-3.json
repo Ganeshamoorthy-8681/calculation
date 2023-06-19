@@ -1,0 +1,11 @@
+{
+    "regionName": "Asia Pacific (Osaka)",
+    "regionCode": "ap-northeast-3",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.050,
+            "generalOutboundCost": 0.09,
+            "specificOutboundCost": null
+        }
+    }
+}

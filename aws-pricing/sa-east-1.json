@@ -1,0 +1,11 @@
+{
+    "regionName": "South America (São Paulo)",
+    "regionCode": "sa-east-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.068,
+            "generalOutboundCost": 0.138,
+            "specificOutboundCost": null
+        }
+    }
+}

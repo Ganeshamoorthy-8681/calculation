@@ -1,0 +1,11 @@
+{
+    "regionName": "Europe (London)",
+    "regionCode": "eu-west-2",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.053,
+            "generalOutboundCost": 0.020,
+            "specificOutboundCost": null
+        }
+    }
+}

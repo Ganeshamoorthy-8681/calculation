@@ -1,0 +1,11 @@
+{
+    "regionName": "Middle East (Bahrain)",
+    "regionCode": "me-south-1",
+    "services": {
+        "ebsVolumeSize": {
+            "snapshotCost": 0.055,
+            "generalOutboundCost": 0.1105,
+            "specificOutboundCost": null
+        }
+    }
+}
