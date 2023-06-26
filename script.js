@@ -52,139 +52,139 @@ let primaryRegionEbsServiceJson, remoteRegionEbsServiceJson
 
 //used to obtain dollar value
 let formatting_options = {
-   style: 'currency',
-   currency: 'USD',
+    style: 'currency',
+    currency: 'USD',
 }
 
 //This object represents the primary region
 let primaryRegionCalculatedValues = {
-   totalEbsVolumeSizeInGb: 0,
-   ebsChangeBetweenProtection: 0,
-   firstSnapshotStorageSize: 0,
-   retentionCopies: 0,
-   snapshotStorageSize: 0,
-   snapshotCost: 0,
-   egressNetworkCost: 0,
-   totalCost: 0
+    totalEbsVolumeSizeInGb: 0,
+    ebsChangeBetweenProtection: 0,
+    firstSnapshotStorageSize: 0,
+    retentionCopies: 0,
+    snapshotStorageSize: 0,
+    snapshotCost: 0,
+    egressNetworkCost: 0,
+    totalCost: 0
 };
 
 //This object represents the remote region
 let remoteRegionCalculatedValues = {
-   fullSnapshotStorageSize: 0,
-   incrementalStorageSize: 0,
-   retentionCopies: 0,
-   snapshotStorageSize: 0,
-   snapshotStorageCost: 0,
-   ingressNetworkcost: 0,
-   totalCost: 0
+    fullSnapshotStorageSize: 0,
+    incrementalStorageSize: 0,
+    retentionCopies: 0,
+    snapshotStorageSize: 0,
+    snapshotStorageCost: 0,
+    ingressNetworkcost: 0,
+    totalCost: 0
 };
 
 
 function formatNumber(number) {
-   if (number == '' || number == NaN || number == undefined || number == "Infinity")
-      return 0
-   else
-      return parseFloat(number)
+    if (number == '' || number == NaN || number == undefined || number == "Infinity")
+        return 0
+    else
+        return parseFloat(number)
 }
 
 //This function avoids displaying NaN in  UI
 function formatCurrencyAndData(data) {
-   if (data == '$NaN') {
-      return "$0.00"
-   } else {
-      return data
-   }
+    if (data == '$NaN') {
+        return "$0.00"
+    } else {
+        return data
+    }
 }
 
 function formatNumberPrecision(number) {
-   if (Number.isInteger(number))
-      return (number);
-   else
-      return parseFloat(number.toFixed(2));
+    if (Number.isInteger(number))
+        return (number);
+    else
+        return parseFloat(number.toFixed(2));
 }
 
 function renderAllValues() {
-   totalEbsVolumeSizeValue = formatNumber(totalEbsVolumeSize.value);
-   ebsChangeRateValue = formatNumber(ebsChangeRate.value);
-   protectionIntervalValue = formatNumber(protectionInterval.value);
-   primaryRetentionCopiesValue = formatNumber(primaryRetentionCopies.value);
-   remoteRetentionCopiesValue = formatNumber(remoteRetentionCopies.value);
-   primaryRegionValue = primaryRegion.value;
-   remoteRegionValue = remoteRegion.value;
+    totalEbsVolumeSizeValue = formatNumber(totalEbsVolumeSize.value);
+    ebsChangeRateValue = formatNumber(ebsChangeRate.value);
+    protectionIntervalValue = formatNumber(protectionInterval.value);
+    primaryRetentionCopiesValue = formatNumber(primaryRetentionCopies.value);
+    remoteRetentionCopiesValue = formatNumber(remoteRetentionCopies.value);
+    primaryRegionValue = primaryRegion.value;
+    remoteRegionValue = remoteRegion.value;
 };
 
 
 async function getRegionDataCost(region) {
-   //Fetches the Region Data Cost file 
-   try {
-      let response = await fetch(`aws-pricing/${region}.json`);
-      let jsonData = await response.json();
-      // console.log("region data received");
-      return jsonData;
-   } catch (error) {
-      console.log(error)
-   }
+    //Fetches the Region Data Cost file 
+    try {
+        let response = await fetch(`aws-pricing/${region}.json`);
+        let jsonData = await response.json();
+        // console.log("region data received");
+        return jsonData;
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
 async function renderRegionCostDataValues() {
-   //Gets the primary and remote region Data Cost data
-   try {
-      primaryRegionDataCostJson = await getRegionDataCost(primaryRegionValue);
-      remoteRegionDataCostJson = await getRegionDataCost(remoteRegionValue);
-      // console.log("primary and remote region values rendered"); 
-   } 
-   catch (error) {
-      console.log(error)
-   }
+    //Gets the primary and remote region Data Cost data
+    try {
+        primaryRegionDataCostJson = await getRegionDataCost(primaryRegionValue);
+        remoteRegionDataCostJson = await getRegionDataCost(remoteRegionValue);
+        // console.log("primary and remote region values rendered"); 
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
 async function changeEventHandler(event) {
-   //Gets the  current value in input field given by user 
-   try {
-      renderAllValues();
-      totalProtectionPerMonthValue = calculateTotalProtectionPerMonth(protectionIntervalValue);
-      totalProtectionPerMonth.value = formatNumber(totalProtectionPerMonthValue);
-      //Gets the region cost data's
-      await renderRegionCostDataValues()
-         .then(() => {
-            //Updates the Region cost
-            updateRegioncost();
-            //Calculate the Required values in primary region
-            primaryRegioncalulation();
-            //Calculate the Required values in remote region
-            remoteRegionCalculation();
-            //Updates the calculated values in DOM for Primary region
-            updatePrimaryRegionValues();
-            //Updates the calculated values in DOM for remote region
-            updateRemoteRegionValues();
-            //Update the general values
-            updateGeneralCost();
-         })
-   } catch (error) {
-      console.log(error)
-   }
+    //Gets the  current value in input field given by user 
+    try {
+        renderAllValues();
+        totalProtectionPerMonthValue = calculateTotalProtectionPerMonth(protectionIntervalValue);
+        totalProtectionPerMonth.textContent = formatNumber(totalProtectionPerMonthValue);
+        //Gets the region cost data's
+        await renderRegionCostDataValues()
+            .then(() => {
+                //Updates the Region cost
+                updateRegioncost();
+                //Calculate the Required values in primary region
+                primaryRegioncalulation();
+                //Calculate the Required values in remote region
+                remoteRegionCalculation();
+                //Updates the calculated values in DOM for Primary region
+                updatePrimaryRegionValues();
+                //Updates the calculated values in DOM for remote region
+                updateRemoteRegionValues();
+                //Update the general values
+                updateGeneralCost();
+            })
+    } catch (error) {
+        console.log(error)
+    }
 };
 
 
 function updateRegioncost() {
-   let primaryRegionSpecificCostRegionJson;
-   let primaryRegionSpecificCostRegionList = [];
-   primaryRegionEbsServiceJson = primaryRegionDataCostJson["services"]["ebsVolumeSize"];
-   remoteRegionEbsServiceJson = remoteRegionDataCostJson["services"]["ebsVolumeSize"];
-   primaryRegionSpecificCostRegionJson = primaryRegionEbsServiceJson["specificOutboundCost"];
+    let primaryRegionSpecificCostRegionJson;
+    let primaryRegionSpecificCostRegionList = [];
+    primaryRegionEbsServiceJson = primaryRegionDataCostJson["services"]["ebsVolumeSize"];
+    remoteRegionEbsServiceJson = remoteRegionDataCostJson["services"]["ebsVolumeSize"];
+    primaryRegionSpecificCostRegionJson = primaryRegionEbsServiceJson["specificOutboundCost"];
 
-   if (primaryRegionSpecificCostRegionJson)
-      primaryRegionSpecificCostRegionList = Object.keys(primaryRegionSpecificCostRegionJson);
+    if (primaryRegionSpecificCostRegionJson)
+        primaryRegionSpecificCostRegionList = Object.keys(primaryRegionSpecificCostRegionJson);
 
-   if (primaryRegionSpecificCostRegionList.includes(remoteRegionValue))
-      primaryRegionDataTransferCostPerGib.textContent = (primaryRegionSpecificCostRegionJson[remoteRegionValue]);
-   else
-      primaryRegionDataTransferCostPerGib.textContent = (primaryRegionEbsServiceJson["generalOutboundCost"]);
+    if (primaryRegionSpecificCostRegionList.includes(remoteRegionValue))
+        primaryRegionDataTransferCostPerGib.textContent = (primaryRegionSpecificCostRegionJson[remoteRegionValue]);
+    else
+        primaryRegionDataTransferCostPerGib.textContent = (primaryRegionEbsServiceJson["generalOutboundCost"]);
 
-   primaryRegionSnapshotCostPerGib.textContent = (primaryRegionEbsServiceJson["snapshotCost"]);
-   remoteRegionSnapshotCostPerGib.textContent = (remoteRegionEbsServiceJson["snapshotCost"]);
-   // console.log(" updatation of region cost is completed");
+    primaryRegionSnapshotCostPerGib.textContent = (primaryRegionEbsServiceJson["snapshotCost"]);
+    remoteRegionSnapshotCostPerGib.textContent = (remoteRegionEbsServiceJson["snapshotCost"]);
+    // console.log(" updatation of region cost is completed");
 }
 
 
@@ -195,117 +195,117 @@ function updateRegioncost() {
 
 
 function updateGeneralCost() {
-   primaryRegionLocalProtection.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
-      primaryRegionCalculatedValues.snapshotCost));
-   remoteRegionStorageCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
-      remoteRegionCalculatedValues.snapshotStorageCost));
-   interRegionDataTransferCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
-      primaryRegionCalculatedValues.egressNetworkCost));
-   overallTotalCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
-      calculateOverallTotalCost(primaryRegionCalculatedValues.snapshotCost,
-         remoteRegionCalculatedValues.snapshotStorageCost,
-         primaryRegionCalculatedValues.egressNetworkCost)));
+    primaryRegionLocalProtection.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
+        primaryRegionCalculatedValues.snapshotCost));
+    remoteRegionStorageCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
+        remoteRegionCalculatedValues.snapshotStorageCost));
+    interRegionDataTransferCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
+        primaryRegionCalculatedValues.egressNetworkCost));
+    overallTotalCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(
+        calculateOverallTotalCost(primaryRegionCalculatedValues.snapshotCost,
+            remoteRegionCalculatedValues.snapshotStorageCost,
+            primaryRegionCalculatedValues.egressNetworkCost)));
 }
 
 
 function primaryRegioncalulation() {
-   primaryRegionCalculatedValues.totalEbsVolumeSizeInGb = calculateTotalEbsVolumeInGb(totalEbsVolumeSizeValue);
-   primaryRegionCalculatedValues.ebsChangeBetweenProtection =
-      calculateEbsChangebetweenProtection(primaryRegionCalculatedValues.totalEbsVolumeSizeInGb, ebsChangeRateValue);
-   primaryRegionCalculatedValues.firstSnapshotStorageSize = primaryRegionCalculatedValues.totalEbsVolumeSizeInGb;
-   primaryRegionCalculatedValues.retentionCopies =
-      calculateRetentionCopiesWithIncrementalSize(primaryRetentionCopiesValue, primaryRegionCalculatedValues.ebsChangeBetweenProtection);
-   primaryRegionCalculatedValues.snapshotStorageSize =
-      calculateRegionSnapshotStorageSize(primaryRegionCalculatedValues.firstSnapshotStorageSize, primaryRegionCalculatedValues.retentionCopies);
-   primaryRegionCalculatedValues.snapshotCost =
-      calculateRegionSnapshotCost(primaryRegionCalculatedValues.snapshotStorageSize, parseFloat(primaryRegionSnapshotCostPerGib.textContent));
-   primaryRegionCalculatedValues.egressNetworkCost =
-      calculateRegionNetworkCost(totalProtectionPerMonthValue, parseFloat(primaryRegionDataTransferCostPerGib.textContent), primaryRegionCalculatedValues.retentionCopies);
-   primaryRegionCalculatedValues.totalCost =
-      calculateRegionTotalCost(primaryRegionCalculatedValues.snapshotCost, primaryRegionCalculatedValues.egressNetworkCost);
+    primaryRegionCalculatedValues.totalEbsVolumeSizeInGb = calculateTotalEbsVolumeInGb(totalEbsVolumeSizeValue);
+    primaryRegionCalculatedValues.ebsChangeBetweenProtection =
+        calculateEbsChangebetweenProtection(primaryRegionCalculatedValues.totalEbsVolumeSizeInGb, ebsChangeRateValue);
+    primaryRegionCalculatedValues.firstSnapshotStorageSize = primaryRegionCalculatedValues.totalEbsVolumeSizeInGb;
+    primaryRegionCalculatedValues.retentionCopies =
+        calculateRetentionCopiesWithIncrementalSize(primaryRetentionCopiesValue, primaryRegionCalculatedValues.ebsChangeBetweenProtection);
+    primaryRegionCalculatedValues.snapshotStorageSize =
+        calculateRegionSnapshotStorageSize(primaryRegionCalculatedValues.firstSnapshotStorageSize, primaryRegionCalculatedValues.retentionCopies);
+    primaryRegionCalculatedValues.snapshotCost =
+        calculateRegionSnapshotCost(primaryRegionCalculatedValues.snapshotStorageSize, parseFloat(primaryRegionSnapshotCostPerGib.textContent));
+    primaryRegionCalculatedValues.egressNetworkCost =
+        calculateRegionNetworkCost(totalProtectionPerMonthValue, parseFloat(primaryRegionDataTransferCostPerGib.textContent), primaryRegionCalculatedValues.retentionCopies);
+    primaryRegionCalculatedValues.totalCost =
+        calculateRegionTotalCost(primaryRegionCalculatedValues.snapshotCost, primaryRegionCalculatedValues.egressNetworkCost);
 };
 
 
 function remoteRegionCalculation() {
-   remoteRegionCalculatedValues.fullSnapshotStorageSize = primaryRegionCalculatedValues.firstSnapshotStorageSize;
-   remoteRegionCalculatedValues.incrementalStorageSize = primaryRegionCalculatedValues.ebsChangeBetweenProtection;
-   remoteRegionCalculatedValues.retentionCopies =
-      calculateRetentionCopiesWithIncrementalSize(remoteRegionCalculatedValues.incrementalStorageSize, remoteRetentionCopiesValue);
-   remoteRegionCalculatedValues.snapshotStorageSize =
-      calculateRegionSnapshotStorageSize(remoteRegionCalculatedValues.fullSnapshotStorageSize, remoteRegionCalculatedValues.retentionCopies);
-   remoteRegionCalculatedValues.snapshotStorageCost =
-      (calculateRegionSnapshotCost(remoteRegionCalculatedValues.snapshotStorageSize, parseFloat(remoteRegionSnapshotCostPerGib.textContent)));
-   remoteRegionCalculatedValues.ingressNetworkcost =
-      calculateRegionNetworkCost(totalProtectionPerMonthValue, 0, remoteRegionCalculatedValues.retentionCopies);
-   remoteRegionCalculatedValues.totalCost =
-      (calculateRegionTotalCost(remoteRegionCalculatedValues.snapshotStorageCost, remoteRegionCalculatedValues.ingressNetworkcost));
+    remoteRegionCalculatedValues.fullSnapshotStorageSize = primaryRegionCalculatedValues.firstSnapshotStorageSize;
+    remoteRegionCalculatedValues.incrementalStorageSize = primaryRegionCalculatedValues.ebsChangeBetweenProtection;
+    remoteRegionCalculatedValues.retentionCopies =
+        calculateRetentionCopiesWithIncrementalSize(remoteRegionCalculatedValues.incrementalStorageSize, remoteRetentionCopiesValue);
+    remoteRegionCalculatedValues.snapshotStorageSize =
+        calculateRegionSnapshotStorageSize(remoteRegionCalculatedValues.fullSnapshotStorageSize, remoteRegionCalculatedValues.retentionCopies);
+    remoteRegionCalculatedValues.snapshotStorageCost =
+        (calculateRegionSnapshotCost(remoteRegionCalculatedValues.snapshotStorageSize, parseFloat(remoteRegionSnapshotCostPerGib.textContent)));
+    remoteRegionCalculatedValues.ingressNetworkcost =
+        calculateRegionNetworkCost(totalProtectionPerMonthValue, 0, remoteRegionCalculatedValues.retentionCopies);
+    remoteRegionCalculatedValues.totalCost =
+        (calculateRegionTotalCost(remoteRegionCalculatedValues.snapshotStorageCost, remoteRegionCalculatedValues.ingressNetworkcost));
 }
 
 
 function updatePrimaryRegionValues() {
-   primaryRegionEbsVolumeSize.value = primaryRegionCalculatedValues.totalEbsVolumeSizeInGb;
-   primaryRegionEbsChangeBetweenProtections.value = primaryRegionCalculatedValues.ebsChangeBetweenProtection;
-   primaryRegionFirstSnapshotSize.value = primaryRegionCalculatedValues.firstSnapshotStorageSize;
-   primaryRegionRetentionCopies.value = primaryRegionCalculatedValues.retentionCopies
-   primaryRegionSnapshotStorageSize.value = primaryRegionCalculatedValues.snapshotStorageSize;
-   primaryRegionSnapShotCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(primaryRegionCalculatedValues.snapshotCost));
-   primaryRegionEgressNetworkCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(primaryRegionCalculatedValues.egressNetworkCost));
-   primaryRegionTotalCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(primaryRegionCalculatedValues.totalCost));
+    primaryRegionEbsVolumeSize.textContent = primaryRegionCalculatedValues.totalEbsVolumeSizeInGb;
+    primaryRegionEbsChangeBetweenProtections.textContent = primaryRegionCalculatedValues.ebsChangeBetweenProtection;
+    primaryRegionFirstSnapshotSize.textContent = primaryRegionCalculatedValues.firstSnapshotStorageSize;
+    primaryRegionRetentionCopies.textContent = primaryRegionCalculatedValues.retentionCopies
+    primaryRegionSnapshotStorageSize.textContent = primaryRegionCalculatedValues.snapshotStorageSize;
+    primaryRegionSnapShotCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(primaryRegionCalculatedValues.snapshotCost));
+    primaryRegionEgressNetworkCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(primaryRegionCalculatedValues.egressNetworkCost));
+    primaryRegionTotalCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(primaryRegionCalculatedValues.totalCost));
 }
 
 
 function updateRemoteRegionValues() {
-   remoteRegionFullSnapshotSize.value = remoteRegionCalculatedValues.fullSnapshotStorageSize;
-   remoteRegionIncrementalStorageSize.value = remoteRegionCalculatedValues.incrementalStorageSize;
-   remoteRegionRetentionCopies.value = remoteRegionCalculatedValues.retentionCopies;
-   remoteRegionStorageSize.value = remoteRegionCalculatedValues.snapshotStorageSize;
-   remoteRegionSnapshotStorageCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(remoteRegionCalculatedValues.snapshotStorageCost));
-   remoteRegionIngressNetworkCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(remoteRegionCalculatedValues.ingressNetworkcost));
-   remoteRegionTotalCost.value = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(remoteRegionCalculatedValues.totalCost));
+    remoteRegionFullSnapshotSize.textContent = remoteRegionCalculatedValues.fullSnapshotStorageSize;
+    remoteRegionIncrementalStorageSize.textContent = remoteRegionCalculatedValues.incrementalStorageSize;
+    remoteRegionRetentionCopies.textContent = remoteRegionCalculatedValues.retentionCopies;
+    remoteRegionStorageSize.textContent = remoteRegionCalculatedValues.snapshotStorageSize;
+    remoteRegionSnapshotStorageCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(remoteRegionCalculatedValues.snapshotStorageCost));
+    remoteRegionIngressNetworkCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(remoteRegionCalculatedValues.ingressNetworkcost));
+    remoteRegionTotalCost.textContent = formatCurrencyAndData(Intl.NumberFormat('en-US', formatting_options).format(remoteRegionCalculatedValues.totalCost));
 }
 
 
 function calculateTotalProtectionPerMonth(protectionIntervalValue) {
-   return formatNumberPrecision( 24 * 30 / protectionIntervalValue );
+    return formatNumberPrecision(24 * 30 / protectionIntervalValue);
 }
 
 
 function calculateTotalEbsVolumeInGb(totalEbsVolumeSizeValue) {
-   return formatNumberPrecision(totalEbsVolumeSizeValue * 1024);
+    return formatNumberPrecision(totalEbsVolumeSizeValue * 1024);
 }
 
 
 function calculateEbsChangebetweenProtection(totalEbsVolumeSizeInGb, ebschangeRateValue) {
-   return formatNumberPrecision(totalEbsVolumeSizeInGb * ebsChangeRateValue / 100);
+    return formatNumberPrecision(totalEbsVolumeSizeInGb * ebsChangeRateValue / 100);
 }
 
 
 function calculateRetentionCopiesWithIncrementalSize(retentionCopiesValue, ebsChangeBetweenProtection) {
-   return formatNumberPrecision(retentionCopiesValue * ebsChangeBetweenProtection);
+    return formatNumberPrecision(retentionCopiesValue * ebsChangeBetweenProtection);
 }
 
 
 function calculateRegionSnapshotStorageSize(firstSnapshotStorageSize, retentionCopiesWithIncrementalSize) {
-   return formatNumberPrecision(firstSnapshotStorageSize + retentionCopiesWithIncrementalSize);
+    return formatNumberPrecision(firstSnapshotStorageSize + retentionCopiesWithIncrementalSize);
 }
 
 
 function calculateRegionSnapshotCost(snapshotStorageSize, regionalCost) {
-   return formatNumberPrecision(formatNumber(snapshotStorageSize * regionalCost));
+    return formatNumberPrecision(formatNumber(snapshotStorageSize * regionalCost));
 }
 
 
 function calculateRegionNetworkCost(totalProtectionPerMonth, regionalCost, retentionCopies) {
-   return formatNumberPrecision( formatNumber(totalProtectionPerMonth * regionalCost * retentionCopies));
+    return formatNumberPrecision(formatNumber(totalProtectionPerMonth * regionalCost * retentionCopies));
 }
 
 
 function calculateRegionTotalCost(snapshotCost, networkCost) {
-   return formatNumberPrecision(formatNumber(snapshotCost + networkCost));
+    return formatNumberPrecision(formatNumber(snapshotCost + networkCost));
 }
 
 function calculateOverallTotalCost(primaryRegionSnapshotCost, remoteRegionSnapshotCost, primaryNetworkCost) {
-   return formatNumberPrecision(formatNumber(primaryRegionSnapshotCost + remoteRegionSnapshotCost + primaryNetworkCost));
+    return formatNumberPrecision(formatNumber(primaryRegionSnapshotCost + remoteRegionSnapshotCost + primaryNetworkCost));
 }
 
 
@@ -315,17 +315,19 @@ remoteRegion.addEventListener("change", changeEventHandler);
 
 //Adds the event to the base input fields
 for (let inputElement of allInputFields) {
-   inputElement.addEventListener('change', changeEventHandler);
+    inputElement.addEventListener('change', changeEventHandler);
 
-   inputElement.addEventListener('focus', (e) => {
-      e.target.nextElementSibling.classList.add('placeholder-color-focused');
-      e.target.nextElementSibling.classList.add('focused');
-   })
+    inputElement.addEventListener('focus', (e) => {
+        e.target.nextElementSibling.classList.add('placeholder-color-focused');
+        e.target.nextElementSibling.classList.add('focused');
+    })
 
-   inputElement.addEventListener('blur', (e) => {
-      e.target.nextElementSibling.classList.remove('placeholder-color-focused');
-      if (!e.target.value) {
-         e.target.nextElementSibling.classList.remove('focused');
-      }
-   })
+    inputElement.addEventListener('blur', (e) => {
+        e.target.nextElementSibling.classList.remove('placeholder-color-focused');
+
+        console.log(e.target.value)
+        if (!e.target.value) {
+            e.target.nextElementSibling.classList.remove('focused');
+        }
+    })
 }
