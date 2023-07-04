@@ -114,6 +114,7 @@ function renderAllValues() {
 };
 
 
+
 async function getRegionDataCost(region) {
     //Fetches the Region Data Cost file 
     try {
@@ -122,7 +123,7 @@ async function getRegionDataCost(region) {
         // console.log("region data received");
         return jsonData;
     } catch (error) {
-        console.log(error)
+        // console.log(error);;
     }
 }
 
@@ -130,12 +131,12 @@ async function getRegionDataCost(region) {
 async function renderRegionCostDataValues() {
     //Gets the primary and remote region Data Cost data
     try {
-        primaryRegionDataCostJson = await getRegionDataCost(primaryRegionValue);
-        remoteRegionDataCostJson = await getRegionDataCost(remoteRegionValue);
+            primaryRegionDataCostJson = await getRegionDataCost(primaryRegionValue);
+            remoteRegionDataCostJson = await getRegionDataCost(remoteRegionValue);
         // console.log("primary and remote region values rendered"); 
     }
     catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
@@ -162,7 +163,7 @@ async function changeEventHandler(event) {
                 updateGeneralCost();
             })
     } catch (error) {
-        console.log(error)
+        // console.log(error);
     }
 };
 
@@ -170,10 +171,15 @@ async function changeEventHandler(event) {
 function updateRegioncost() {
     let primaryRegionSpecificCostRegionJson;
     let primaryRegionSpecificCostRegionList = [];
-    primaryRegionEbsServiceJson = primaryRegionDataCostJson["services"]["ebsVolumeSize"];
-    remoteRegionEbsServiceJson = remoteRegionDataCostJson["services"]["ebsVolumeSize"];
-    primaryRegionSpecificCostRegionJson = primaryRegionEbsServiceJson["specificOutboundCost"];
 
+    if (primaryRegionValue) {
+        primaryRegionEbsServiceJson = primaryRegionDataCostJson["services"]["ebsVolumeSize"];
+        primaryRegionSpecificCostRegionJson = primaryRegionEbsServiceJson["specificOutboundCost"];
+    } 
+         
+    if(remoteRegionValue) 
+        remoteRegionEbsServiceJson = remoteRegionDataCostJson["services"]["ebsVolumeSize"];
+    
     if (primaryRegionSpecificCostRegionJson)
         primaryRegionSpecificCostRegionList = Object.keys(primaryRegionSpecificCostRegionJson);
 
@@ -182,8 +188,11 @@ function updateRegioncost() {
     else
         primaryRegionDataTransferCostPerGib.textContent = (primaryRegionEbsServiceJson["generalOutboundCost"]);
 
-    primaryRegionSnapshotCostPerGib.textContent = (primaryRegionEbsServiceJson["snapshotCost"]);
-    remoteRegionSnapshotCostPerGib.textContent = (remoteRegionEbsServiceJson["snapshotCost"]);
+    if(primaryRegionEbsServiceJson["snapshotCost"])
+        primaryRegionSnapshotCostPerGib.textContent = (primaryRegionEbsServiceJson["snapshotCost"]);
+    
+    if(remoteRegionEbsServiceJson["snapshotCost"])
+        remoteRegionSnapshotCostPerGib.textContent = (remoteRegionEbsServiceJson["snapshotCost"]);
     // console.log(" updatation of region cost is completed");
 }
 

@@ -8,176 +8,140 @@
    <title>Aws cost calculation</title>
    <link rel="shortcut icon" href="" type="image/x-icon">
    <link rel="stylesheet" href="style.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
    <h1 class="page__heading">AWS COST CALCULATION</h1>
    <main id="container">
-      <div class="container__inputs card-style">
+      <div class="container__region__inputs card-style">
          <span style="color:rgb(4, 120, 215);">Note: All calculations are in GB & TB (1024)*</span>
-                  <div class="container__input__wrapper--region-selection">
-                     <label for="primary-region" class="container__input__label">Select the Primary Region</label>
-                     <select name="primary-region" id="primary-region" class="container__dropdown__input__element">
-                        <option value="us-east-1">US East (N.Virginia)</option>
-                        <option value="us-west-1">US West (N.California)</option>
-                        <option value="us-east-2">US East (Ohio)</option>
-                        <option value="us-west-2">US West (Oregon)</option>
-                        <option value="ca-central-1">Canada (Central)</option>
-                        <option value="af-south-1">Africa (Cape Town)</option>
-                        <option value="ap-east-1">Asia Pacific (Hong Kong)</option>
-                        <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
-                        <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
-                        <option value="ap-southeast-4">Asia Pacific (Melbourne)</option>
-                        <option value="ap-southeast-3">Asia Pacific (Jakarta)</option>
-                        <option value="ap-south-1">Asia Pacific (Mumbai)</option>
-                        <option value="ap-south-2">Asia Pacific (Hyderabad)</option>
-                        <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
-                        <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
-                        <option value="ap-northeast-3">Asia Pacific (Osaka)</option>
-                        <option value="eu-central-1">Europe (Frankfurt)</option>
-                        <option value="eu-central-2">Europe (Zurich)</option>
-                        <option value="eu-west-1">Europe (Ireland)</option>
-                        <option value="eu-west-2">Europe (London)</option>
-                        <option value="eu-west-3">Europe (Paris)</option>
-                        <option value="eu-south-1">Europe (Milan)</option>
-                        <option value="eu-south-2">Europe (Spain)</option>
-                        <option value="eu-north-1">Europe (Stockholm)</option>
-                        <option value="me-central-1">Middle East (UAE)</option>
-                        <option value="me-south-1">Middle East (Bahrain)</option>
-                     </select>
-                        <em>
-                        <p id="container__dropdown__snapshot__cost">Snapshot-cost: <b id="primary__snapshot__cost">0.05</b> /
-                           GB</p>
-                        <p id="container__dropdown__data-transfer__cost">Data-Transfer cost: <b id="primary__data-transfer__cost">0.02</b>
-                           / GB</p>
-                        </em>
-                  </div>
-                  <div class="container__input__wrapper--region-selection">
-                     <label for="remote-region" class="container__input__label">Select the Remote Region</label>
-                     <select name="remote-region" id="remote-region" class="container__dropdown__input__element">
-                        <option value="us-west-1">US West (N.California)</option>
-                        <option value="us-east-1">US East (N.Virginia)</option>
-                        <option value="us-east-2">US East (Ohio)</option>
-                        <option value="us-west-2">US West (Oregon)</option>
-                        <option value="ca-central-1">Canada (Central)</option>
-                        <option value="af-south-1">Africa (Cape Town)</option>
-                        <option value="ap-east-1">Asia Pacific (Hong Kong)</option>
-                        <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
-                        <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
-                        <option value="ap-southeast-4">Asia Pacific (Melbourne)</option>
-                        <option value="ap-southeast-3">Asia Pacific (Jakarta)</option>
-                        <option value="ap-south-1">Asia Pacific (Mumbai)</option>
-                        <option value="ap-south-2">Asia Pacific (Hyderabad)</option>
-                        <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
-                        <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
-                        <option value="ap-northeast-3">Asia Pacific (Osaka)</option>
-                        <option value="eu-central-1">Europe (Frankfurt)</option>
-                        <option value="eu-central-2">Europe (Zurich)</option>
-                        <option value="eu-west-1">Europe (Ireland)</option>
-                        <option value="eu-west-2">Europe (London)</option>
-                        <option value="eu-west-3">Europe (Paris)</option>
-                        <option value="eu-south-1">Europe (Milan)</option>
-                        <option value="eu-south-2">Europe (Spain)</option>
-                        <option value="eu-north-1">Europe (Stockholm)</option>
-                        <option value="me-central-1">Middle East (UAE)</option>
-                        <option value="me-south-1">Middle East (Bahrain)</option>
-                     </select>
-                        <em>
+         <div class="container__input__wrapper__region-selection--primary-region">
+            <b> <label for="primary-region" class="container__input__label"> Primary Region</label> </b>
+            <select name="primary-region" id="primary-region" class="container__dropdown__input__element">
+               <option value="" selected disabled hidden>Select the Primary Region</option>
+               <option value="us-east-1">US East (N.Virginia)</option>
+               <option value="us-west-1">US West (N.California)</option>
+               <option value="us-east-2">US East (Ohio)</option>
+               <option value="us-west-2">US West (Oregon)</option>
+               <option value="ca-central-1">Canada (Central)</option>
+               <option value="af-south-1">Africa (Cape Town)</option>
+               <option value="ap-east-1">Asia Pacific (Hong Kong)</option>
+               <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+               <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+               <option value="ap-southeast-4">Asia Pacific (Melbourne)</option>
+               <option value="ap-southeast-3">Asia Pacific (Jakarta)</option>
+               <option value="ap-south-1">Asia Pacific (Mumbai)</option>
+               <option value="ap-south-2">Asia Pacific (Hyderabad)</option>
+               <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
+               <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
+               <option value="ap-northeast-3">Asia Pacific (Osaka)</option>
+               <option value="eu-central-1">Europe (Frankfurt)</option>
+               <option value="eu-central-2">Europe (Zurich)</option>
+               <option value="eu-west-1">Europe (Ireland)</option>
+               <option value="eu-west-2">Europe (London)</option>
+               <option value="eu-west-3">Europe (Paris)</option>
+               <option value="eu-south-1">Europe (Milan)</option>
+               <option value="eu-south-2">Europe (Spain)</option>
+               <option value="eu-north-1">Europe (Stockholm)</option>
+               <option value="me-central-1">Middle East (UAE)</option>
+               <option value="me-south-1">Middle East (Bahrain)</option>
+            </select>
+         </div>
+            <em>
+               <p class="container__dropdown__snapshot__cost">Snapshot-cost: <b id="primary__snapshot__cost">0.00</b> <span class="input__units"> /
+                  GB </span> </p>
+               <p class="container__dropdown__data-transfer__cost">Data-Transfer cost: <b id="primary__data-transfer__cost">0.00</b> 
+                  <span class="input__units"> / GB </span> </p>
+            </em>
 
-                           <p id="container__dropdown__snapshot__cost">Snapshot-cost: <b id="remote__snapshot__cost">0.055</b> /
-                              GB</p>
-                           <p id="container__dropdown__data-transfer__cost">Data-Transfer cost: <b
-                                 id="remote__data-transfer__cost">0.00</b> / GB</p>
-                        </em>
-                  </div>
-         
+         <div class="container__input__wrapper__region-selection--remote-region">
+         <b> <label for="remote-region" class="container__input__label">Remote Region</label> </b>
+            <select name="remote-region" id="remote-region" class="container__dropdown__input__element">
+               <option value="" selected disabled hidden>Select the Remote Region</option>
+               <option value="us-west-1">US West (N.California)</option>
+               <option value="us-east-1">US East (N.Virginia)</option>
+               <option value="us-east-2">US East (Ohio)</option>
+               <option value="us-west-2">US West (Oregon)</option>
+               <option value="ca-central-1">Canada (Central)</option>
+               <option value="af-south-1">Africa (Cape Town)</option>
+               <option value="ap-east-1">Asia Pacific (Hong Kong)</option>
+               <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+               <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+               <option value="ap-southeast-4">Asia Pacific (Melbourne)</option>
+               <option value="ap-southeast-3">Asia Pacific (Jakarta)</option>
+               <option value="ap-south-1">Asia Pacific (Mumbai)</option>
+               <option value="ap-south-2">Asia Pacific (Hyderabad)</option>
+               <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
+               <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
+               <option value="ap-northeast-3">Asia Pacific (Osaka)</option>
+               <option value="eu-central-1">Europe (Frankfurt)</option>
+               <option value="eu-central-2">Europe (Zurich)</option>
+               <option value="eu-west-1">Europe (Ireland)</option>
+               <option value="eu-west-2">Europe (London)</option>
+               <option value="eu-west-3">Europe (Paris)</option>
+               <option value="eu-south-1">Europe (Milan)</option>
+               <option value="eu-south-2">Europe (Spain)</option>
+               <option value="eu-north-1">Europe (Stockholm)</option>
+               <option value="me-central-1">Middle East (UAE)</option>
+               <option value="me-south-1">Middle East (Bahrain)</option>
+            </select>
+            </div>
+            <em>
+               <p class="container__dropdown__snapshot__cost">Snapshot-cost: <b id="remote__snapshot__cost">0.00</b> /
+                  GB</p>
+               <p class="container__dropdown__data-transfer__cost">Data-Transfer cost: <b id="remote__data-transfer__cost">0.00</b>
+                  / GB</p>
+            </em>
 
-         <div class="container__input__wrapper">
-            <label for="EBS-volume-size" class="container__input__label">Enter the Total EBS Volume Size
-               (TB)</label>
-            <div class="container__input__element__wrapper">
-               <input type="number" id="EBS-volume-size" min="0" class="container__input__element">
-               <label class="placeholder">Total EBS Volume Size</label>
-            </div>
-         </div>
-         <div class="container__input__wrapper">
-            <label for="EBS-change-rate" class="container__input__label">Enter the EBS Volume Change Rate
-               (%)</label>
-            <div class="container__input__element__wrapper">
-               <input type="number" id="EBS-change-rate" class="container__input__element" min="0">
-               <label class="placeholder">EBS Volume Change Rate</label>
-            </div>
-         </div>
-         <div class="container__input__wrapper">
-            <label for="protection-interval" class="container__input__label">Enter the protection Interval in
-               Hours</label>
-            <div class="container__input__element__wrapper">
-               <input type="number" id="protection-interval" min="0" class="container__input__element">
-               <label class="placeholder">Protection Interval</label>
-            </div>
-         </div>
-         <div class="container__input__wrapper">
-            <label for="primary-retention" class="container__input__label">Enter the primary Region Retention
-               Copies Count</label>
-            <div class="container__input__element__wrapper">
-               <input type="number" id="primary-retention" min="0" class="container__input__element">
-               <label class="placeholder">Primary Region Retention Copies</label>
-            </div>
-         </div>
-         <div class="container__input__wrapper">
-            <label for="remote-retention" class="container__input__label"> Enter the remote Region Retention
-               Copies Count</label>
-            <div class="container__input__element__wrapper">
-               <input type="number" id="remote-retention" min="0" class="container__input__element">
-               <label class="placeholder">Remote Region Retention Copies</label>
-            </div>
-         </div>
       </div>
-      <div class="container__summary">
-         <div class="container__total-protection">
-            <img src="images/cube2.svg" width="40px" height="40px" draggable="false" style="align-self:center;">
-            <div class="container__input__element__wrapper--total-protection">
-               <label for="total-protection" class="container__input__label">Total protections per month</label>
-               <div>
-                  <span id="total-protection" class="container__calculated__input__element"
-                     title="Total protections in a month">0</span> <span class="input__units"> / Month </span>
+      
+            <div class="container__summary">
+
+                  <div class="container__input__element__wrapper--total-protection">
+                     <label for="total-protection" class="container__input__label">Total protections per month</label>
+                     <div>
+                        <span id="total-protection" class="container__calculated__input__element"
+                           title="Total protections in a month">0</span> <span class="input__units"> / Month </span>
+                     </div>
+               </div>
+
+               <div class="container__input__wrapper--cost">
+                  <label for="primary-region-local-protection" class="container__input__label">Primary Region Storage
+                     Cost</label>
+                  <div>
+                     <span id="primary-region-local-protection" class="container__calculated__input__element--cost" title="Primary Region Local Protection Only 
+                                 (Inter-zone recovery)">$0.00 </span><span class="input__units"> USD / Month </span>
+                  </div>
+               </div>
+               <div class="container__input__wrapper--cost">
+                  <label for="remote-region-storage-cost" class="container__input__label">Remote Region Storage
+                     cost</label>
+                  <div>
+                     <span id="remote-region-storage-cost" class="container__calculated__input__element--cost"
+                        title="Remote Region Storage cost">$0.00</span>
+                     <span class="input__units"> USD / Month </span>
+                  </div>
+               </div>
+               <div class="container__input__wrapper--cost">
+                  <label for="inter-region-data-transfer-cost" class="container__input__label">Inter-region data
+                     transfer cost</label>
+                  <div>
+                     <span id="inter-region-data-transfer-cost" class="container__calculated__input__element--cost"
+                        title="Inter-region data transfer cost">$0.00</span>
+                     <span class="input__units"> USD / Month </span>
+                  </div>
+               </div>
+               <div class="container__input__wrapper--cost">
+                  <label for="total-cost" class="container__input__label">Total cost</label>
+                  <div>
+                     <span id="total-cost" class="container__calculated__input__element--cost"
+                        title="Overall Total Cost">$0.00</span><span class="input__units"> USD / Month </span>
+                  </div>
                </div>
             </div>
-         </div>
-         <div class="container__input__wrapper--cost">
-            <label for="primary-region-local-protection" class="container__input__label">Primary Region Storage
-               Cost</label>
-            <div>
-               <span id="primary-region-local-protection" class="container__calculated__input__element--cost" title="Primary Region Local Protection Only 
-                     (Inter-zone recovery)">$0.00 </span><span class="input__units"> USD / Month </span>
-            </div>
-         </div>
-         <div class="container__input__wrapper--cost">
-            <label for="remote-region-storage-cost" class="container__input__label">Remote Region Storage
-               cost</label>
-            <div>
-               <span id="remote-region-storage-cost" class="container__calculated__input__element--cost"
-                  title="Remote Region Storage cost">$0.00</span>
-               <span class="input__units"> USD / Month </span>
-            </div>
-         </div>
-         <div class="container__input__wrapper--cost">
-            <label for="inter-region-data-transfer-cost" class="container__input__label">Inter-region data
-               transfer cost</label>
-            <div>
-               <span id="inter-region-data-transfer-cost" class="container__calculated__input__element--cost"
-                  title="Inter-region data transfer cost">$0.00</span>
-               <span class="input__units"> USD / Month </span>
-            </div>
-         </div>
-         <div class="container__input__wrapper--cost">
-            <label for="total-cost" class="container__input__label">Total cost</label>
-            <div>
-               <span id="total-cost" class="container__calculated__input__element--cost"
-                  title="Overall Total Cost">$0.00</span><span class="input__units"> USD / Month </span>
-            </div>
-         </div>
-      </div>
 
 
       <div class="container__region__values">
@@ -327,8 +291,49 @@
       </div>
    </div>
       </div>
-  
 
+      <div class="container__inputs card-style">
+         <div class="container__input__wrapper">
+             <label for="EBS-volume-size" class="container__input__label">Total EBS Volume Size
+               (TB)</label> 
+            <div class="container__input__element__wrapper">
+               <input type="number" id="EBS-volume-size" min="0" class="container__input__element">
+               <label class="placeholder">Enter the Total EBS Volume Size</label>
+            </div>
+         </div>
+         <div class="container__input__wrapper">
+             <label for="EBS-change-rate" class="container__input__label">EBS Volume Change Rate
+               (%)</label>
+            <div class="container__input__element__wrapper">
+               <input type="number" id="EBS-change-rate" class="container__input__element" min="0">
+               <label class="placeholder">Enter the EBS Volume Change Rate</label>
+            </div>
+         </div>
+         <div class="container__input__wrapper">
+           <label for="protection-interval" class="container__input__label">Protection Interval in
+               Hours</label>
+            <div class="container__input__element__wrapper">
+               <input type="number" id="protection-interval" min="0" class="container__input__element">
+               <label class="placeholder">Enter the Protection Interval</label>
+            </div>
+         </div>
+         <div class="container__input__wrapper">
+            <label for="primary-retention" class="container__input__label">Primary Region Retention
+               Copies (Count)</label>
+            <div class="container__input__element__wrapper">
+               <input type="number" id="primary-retention" min="0" class="container__input__element">
+               <label class="placeholder">Enter the Primary Region Retention Copies</label>
+            </div>
+         </div>
+         <div class="container__input__wrapper">
+             <label for="remote-retention" class="container__input__label">  Remote Region Retention
+               Copies (Count)</label>
+            <div class="container__input__element__wrapper">
+               <input type="number" id="remote-retention" min="0" class="container__input__element">
+               <label class="placeholder">Enter the Remote Region Retention Copies</label>
+            </div>
+         </div>
+      </div>
    </main>
    <script src="script.js"></script>
 </body>
